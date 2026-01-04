@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  /* bg-amber-300 */
+  background: oklch(87.9% 0.169 91.605);
+}
+
+::-webkit-scrollbar-thumb {
+  /* bg-gray-900 */
+  background: oklch(21% 0.034 264.665);
+}

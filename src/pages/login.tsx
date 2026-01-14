@@ -5,6 +5,7 @@ import { auth } from "../lib/firebase"
 import { useAuthStore } from "../hooks/store/auth"
 import { useEffect } from "react"
 import { useSetup } from "../hooks/setup"
+import { sendError } from "../lib/sentry"
 
 export default function App() {
   const navigate = useNavigate()
@@ -18,7 +19,13 @@ export default function App() {
       const provider = new GoogleAuthProvider()
       await signInWithPopup(auth, provider)
     } catch(e) {
-      console.error(e)
+      if (e instanceof Error) {
+        // そのまま通れ！
+        sendError(e)
+      } else {
+        // 文字列をError型にする
+        sendError(new Error(String(e)))
+      }
     }
   }
 

@@ -1,8 +1,8 @@
-import * as Sentry from "@sentry/react"
+import * as sentry from "@sentry/react"
 
 // 開発モードならSentryを立ち上げない
-if (import.meta.env.DEV) {
-  Sentry.init({
+if (!import.meta.env.DEV) {
+  sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
     sendDefaultPii: true
   })

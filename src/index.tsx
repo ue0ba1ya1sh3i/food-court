@@ -3,8 +3,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 // パスのコンポーネント
-import Root from "./route/root"
-import Login from "./route/login"
+import Root from "./pages/root"
+import Login from "./pages/login"
 
 // その他もろもろ
 import './css/index.css'

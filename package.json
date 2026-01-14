@@ -7,10 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "emulator": "firebase emulators:start"
+    "deploy": "firebase deploy",
+    "emulator": "firebase emulators:start",
+    "relase": "npm run build && npm run deploy"
   },
   "dependencies": {
+    "@sentry/react": "^10.33.0",
+    "@sentry/vite-plugin": "^4.6.1",
     "@tailwindcss/vite": "^4.1.18",
     "firebase": "^12.7.0",
     "react": "^19.2.0",

@@ -1,5 +1,8 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { getAuth, connectAuthEmulator } from 'firebase/auth'
+import { getFunctions, connectFunctionsEmulator } from 'firebase/functions'
+import { getStorage, connectStorageEmulator } from 'firebase/storage'
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -13,6 +16,18 @@ const firebaseConfig = {
 
 // 初期化
 const app = initializeApp(firebaseConfig)
-const auth = getAuth(app)
 
-export { auth }
+const auth = getAuth(app)
+const firestore = getFirestore(app)
+const storage = getStorage(app)
+const functions = getFunctions(app)
+
+// 開発モードならエミュレーターに接続
+if (import.meta.env.DEV) {
+  connectAuthEmulator(auth, "http://localhost:9099")
+  connectFirestoreEmulator(firestore, "localhost", 8080)
+  connectStorageEmulator(storage, "localhost", 9199)
+  connectFunctionsEmulator(functions, "localhost", 5001)
+}
+
+export { auth, firestore, storage, functions }

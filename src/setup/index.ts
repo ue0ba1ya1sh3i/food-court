@@ -1,8 +1,8 @@
-// すべてのモジュールのインポート
-const modules = import.meta.glob("./*.ts", { eager: true })
+// すべてのコードのインポート
+const codes = import.meta.glob("./*.ts", { eager: true })
 
-// 各モジュールのコードを実行
-for (const path in modules) {
-    const module = modules[path] as { default?: () => void }
-    module.default?.()
+// 各コードの実行
+for (const path in codes) {
+    const code = codes[path] as { default?: () => void }
+    code.default?.()
 }

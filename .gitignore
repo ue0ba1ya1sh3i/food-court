@@ -3,3 +3,4 @@ dist/
 .env
 .firebaserc
 *.log
+.env.sentry-build-plugin

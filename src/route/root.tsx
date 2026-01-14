@@ -1,18 +1,25 @@
-import { useNavigate } from "react-router-dom"
-import { isChromeBook } from "../lib/device"
+import { useSetup } from "../hooks/setup"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAuthStore } from "../hooks/store/auth"
+import { logout } from "../lib/logout"
 
 export default function App() {
+  const { user, authLoading } = useAuthStore()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    // 判定
-    if (isChromeBook()) {
-      navigate("/c")
-    } else {
-      navigate("/m")
-    }
-  })
+  useSetup("main")
 
-  return null
+  // ログインしてないなら/loginに飛ばす
+  useEffect(() => {
+    if (!user && !authLoading) {
+      navigate("/login", { replace: true })
+    }
+  }, [user, navigate, authLoading])
+
+  return (
+    <>
+      <button onClick={logout}>Logout</button>
+    </>
+  )
 }

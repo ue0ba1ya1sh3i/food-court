@@ -4,7 +4,7 @@ import type { User } from 'firebase/auth'
 type Auth = {
   // Firebaseのユーザーの型
   user: User | null
-  loading: boolean
+  authLoading: boolean
 
   // ちゃんとUserの型じゃないといけなくしてる俺すごいでしょ？
   setUser: (user: User | null) => void
@@ -17,9 +17,9 @@ export const useAuthStore = create<Auth>((set) => ({
   user: null,
 
   // 初回はローディングをオンにして読み込み中かを判断する
-  loading: true,
+  authLoading: true,
 
   // セットするための関数
   setUser: (user) => set({ user }),
-  setLoading: (loading) => set({ loading }),
+  setLoading: (loading) => set({ authLoading: loading }),
 }))

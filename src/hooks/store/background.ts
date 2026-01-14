@@ -1,12 +1,12 @@
 import { create } from "zustand"
 
 // 背景テーマ
-export type BackgroundType = "normal" | "settings"
+export type BackgroundType = "theme" | "main"
 
 // テーマをTailwind CSSに
 const backgroundMap: Record<BackgroundType, string> = {
-  normal: "bg-red-400 text-gray-100",
-  settings: "bg-blue-100 text-gray-900"
+  theme: "bg-red-400 text-gray-100",
+  main: "bg-gray-100 text-gray-900"
 }
 
 const useBackgroundStore = create<{
@@ -14,7 +14,7 @@ const useBackgroundStore = create<{
   setBackground: (type: BackgroundType) => void
 }>((set) => ({
   // 初期値
-  backgroundType: "normal",
+  backgroundType: "main",
   setBackground: (type) => set({ backgroundType: type }),
 }))
 

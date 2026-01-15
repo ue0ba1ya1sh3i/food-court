@@ -4,3 +4,4 @@ dist/
 .firebaserc
 *.log
 .env.sentry-build-plugin
+*.cache

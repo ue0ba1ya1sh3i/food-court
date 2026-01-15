@@ -2,8 +2,7 @@
   "name": "functions",
   "scripts": {
     "dev": "tsc --watch",
-    "shell": "tsc && firebase functions:shell",
-    "logs": "firebase functions:log"
+    "build": "tsc"
   },
   "engines": {
     "node": "24"

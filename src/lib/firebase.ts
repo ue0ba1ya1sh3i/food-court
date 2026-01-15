@@ -23,7 +23,7 @@ const storage = getStorage(app)
 const functions = getFunctions(app)
 
 // 開発モードならエミュレーターに接続
-if (import.meta.env.DEV) {
+if (import.meta.env.DEV && import.meta.env.VITE_FIREBASE_EMULATOR === "on") {
   connectAuthEmulator(auth, "http://localhost:9099")
   connectFirestoreEmulator(firestore, "localhost", 8080)
   connectStorageEmulator(storage, "localhost", 9199)

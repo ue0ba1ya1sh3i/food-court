@@ -9,6 +9,7 @@
     "dev:functions": "npm --prefix ./functions run dev",
     "emulator": "firebase emulators:start --only hosting,firestore,auth,storage,functions",
     "relase": "tsc -b && vite build && firebase deploy",
+    "relase:hosting": "tsc -b && vite build && firebase deploy --only hosting",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -37,6 +38,7 @@
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-plugin-pwa": "^1.2.0"
   }
 }

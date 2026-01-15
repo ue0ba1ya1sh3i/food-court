@@ -9,7 +9,7 @@ type Auth = {
   // ちゃんとUserの型じゃないといけなくしてる俺すごいでしょ？
   setUser: (user: User | null) => void
 
-  setLoading: (loading: boolean) => void
+  setAuthLoading: (loading: boolean) => void
 }
 
 export const useAuthStore = create<Auth>((set) => ({
@@ -21,5 +21,5 @@ export const useAuthStore = create<Auth>((set) => ({
 
   // セットするための関数
   setUser: (user) => set({ user }),
-  setLoading: (loading) => set({ authLoading: loading }),
+  setAuthLoading: (loading) => set({ authLoading: loading }),
 }))

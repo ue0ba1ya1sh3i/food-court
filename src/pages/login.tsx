@@ -9,9 +9,9 @@ import { sendError } from "../lib/sentry"
 
 export default function App() {
   const navigate = useNavigate()
-  const { user, authLoading } = useAuthStore()
+  const { user } = useAuthStore()
 
-  useSetup("theme")
+  useSetup("theme", "ログイン")
   
   // Googleでログイン
   const handleLogin = async () => {
@@ -36,12 +36,9 @@ export default function App() {
     }
   }, [user, navigate])
 
-  // ローディング中
-  if (authLoading) return null
-
   return (
     <div className="min-h-dvh flex flex-col items-center gap-4 justify-center">
-      <p className="text-4xl font-bold">{storeName}</p>
+      <p className="text-4xl font-bold text-center">{storeName}</p>
       <div className="flex gap-4 text-2xl font-bold">
         <button className="border-b-2 cursor-pointer" onClick={handleLogin}>ログイン</button>
         <button className="border-b-2 cursor-pointer">QRチャージ</button>

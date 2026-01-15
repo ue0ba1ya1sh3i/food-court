@@ -5,21 +5,23 @@ import { createRoot } from 'react-dom/client'
 // パスのコンポーネント
 import Root from "./pages/root"
 import Login from "./pages/login"
+import Offline from "./pages/offline"
 
 // その他もろもろ
 import './css/index.css'
 import './setup'
-import Setup from "./component/setup"
+import { Setup } from "./component/setup"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Setup>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Setup>
         <Routes>
           <Route path="/" element={<Root />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/offline" element={<Offline />} />
         </Routes>
-      </BrowserRouter>
-    </Setup>
+      </Setup>
+    </BrowserRouter>
   </StrictMode>
 )

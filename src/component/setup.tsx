@@ -1,8 +1,16 @@
 import React from "react"
 import { useBackgroundClass } from "../hooks/store/background"
 
-export default function App({ children }: { children: React.ReactNode }) {
+// セットアップhooks
+import { useSetupLogin } from "../setup/hooks/login"
+import { useSetupOffline } from "../setup/hooks/offline"
+
+export function Setup({ children }: { children: React.ReactNode }) {
   const { backgroundClass } = useBackgroundClass()
+
+  // セットアップhooksを実行
+  useSetupLogin()
+  useSetupOffline()
 
   return (
     <div className={`min-h-dvh ${backgroundClass}`}>

@@ -18,7 +18,7 @@ type Main = {
   footerType: FooterType,
   logout?: boolean,
   mainClass?: string,
-  margin?: boolean
+  noMargin?: boolean
 }
 
 type FooterMap = {
@@ -74,7 +74,7 @@ const footerMapLogout: FooterMap = [
   }
 ]
 
-export function Main({ children, title, footerType, logout, mainClass, margin }: Main) {
+export function Main({ children, title, footerType, logout, mainClass, noMargin }: Main) {
   const { user, authLoading } = useAuthStore()
 
   const map = useMemo(() => {
@@ -99,7 +99,7 @@ export function Main({ children, title, footerType, logout, mainClass, margin }:
         )}
       </div>
 
-      <div className={`${!margin && "pt-12 pb-20 md:pb-0"} ${mainClass}`}>
+      <div className={`${!noMargin && "pt-12 pb-20 md:pb-0"} ${mainClass}`}>
         {children}
       </div>
 

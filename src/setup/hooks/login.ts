@@ -9,7 +9,7 @@ export function useSetupLogin() {
 
   useEffect(() => {
     // 除外パスの設定
-    const ignorePaths = ["/qrCharge"]
+    const ignorePaths = ["qrCharge"]
     const isIgnored = ignorePaths.some(path =>
       location.pathname.includes(path)
     )

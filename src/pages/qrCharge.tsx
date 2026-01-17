@@ -14,7 +14,7 @@ export default function App() {
   useSetup("main", "QRチャージ")
 
   const videoRef = useRef<HTMLVideoElement>(null)
-  const allowPath = "/charge/"
+  const allowPath = "/qrCharge/"
   const allowDomain = import.meta.env.VITE_ALLOW_DOMAIN
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function App() {
             const chargeId = url.pathname.replace(allowPath, "")
             if (!chargeId) return setCameraText("IDが存在しません")
             controls?.stop()
-            navigate(`/charge/id/${chargeId}`)
+            navigate(`/qrCharge/${chargeId}`)
           }
         )
       } catch(error) {
@@ -75,7 +75,7 @@ export default function App() {
   }, [allowDomain, navigate, isCameraReady])
 
   return (
-    <Main title="QRチャージ" footerType="charge" logout={true} margin={true}>
+    <Main title="QRチャージ" footerType="charge" logout={true} noMargin={true}>
       <div className="flex flex-col gap-2 items-center text-center p-5 min-h-dvh justify-center">
         <p className="text-xl font-bold">QRコードからチャージ</p>
         <video ref={videoRef} className="w-60 aspect-square object-cover rounded-xl border" muted playsInline />

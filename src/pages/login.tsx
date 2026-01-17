@@ -41,7 +41,7 @@ export default function App() {
       <p className="text-4xl font-bold text-center">{storeName}</p>
       <div className="flex gap-4 text-2xl font-bold">
         <button className="border-b-2 cursor-pointer" onClick={handleLogin}>ログイン</button>
-        <button className="border-b-2 cursor-pointer">QRチャージ</button>
+        <button className="border-b-2 cursor-pointer" onClick={() => navigate("/qrCharge")}>QRチャージ</button>
       </div>
     </div>
   )

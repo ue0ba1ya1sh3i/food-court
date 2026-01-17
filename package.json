@@ -8,15 +8,19 @@
     "dev:emulator": "cross-env VITE_FIREBASE_EMULATOR=on npm run dev",
     "dev:functions": "npm --prefix ./functions run dev",
     "emulator": "firebase emulators:start --only hosting,firestore,auth,storage,functions",
-    "relase": "tsc -b && vite build && firebase deploy",
-    "relase:hosting": "tsc -b && vite build && firebase deploy --only hosting",
-    "lint": "eslint ."
+    "build": "tsc -b && vite build",
+    "confirm": "npm run build && firebase emulators:start --only hosting",
+    "lint": "eslint .",
+    "relase": "npm run build && firebase deploy",
+    "relase:hosting": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@sentry/react": "^10.33.0",
     "@sentry/vite-plugin": "^4.6.1",
     "@tailwindcss/vite": "^4.1.18",
+    "@zxing/browser": "^0.1.5",
     "firebase": "^12.7.0",
+    "qrcode.react": "^4.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",

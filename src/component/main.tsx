@@ -1,18 +1,24 @@
 import type React from "react"
+import { useMemo } from "react"
 import { FaHome } from "react-icons/fa"
 import { FaBowlFood } from "react-icons/fa6"
-import { IoMdSettings } from "react-icons/io"
+import { IoMdMenu, IoMdSettings } from "react-icons/io"
 import { Link } from "react-router-dom"
 import { RiMoneyDollarCircleFill } from "react-icons/ri"
-import { logout } from "../lib/logout"
 import { MdLogout } from "react-icons/md"
+import { logout as logoutFunc } from "../lib/logout"
+import { useAuthStore } from "../hooks/store/auth"
+import { color } from "../lib/color"
 
 type FooterType = "home" | "menu" | "charge" | "settings"
 
 type Main = {
   children: React.ReactNode
   title: string
-  footerType: FooterType
+  footerType: FooterType,
+  logout?: boolean,
+  mainClass?: string,
+  margin?: boolean
 }
 
 type FooterMap = {
@@ -52,21 +58,54 @@ const footerMap: FooterMap = [
   }
 ]
 
-export function Main({ children, title, footerType }: Main) {
+const footerMapLogout: FooterMap = [
+  {
+    footerType: "home",
+    label: "ログイン",
+    to: "/login",
+    icon: <FaHome size={25} />
+  },
+
+  {
+    footerType: "charge",
+    label: "チャージ",
+    to: "/qrCharge",
+    icon: <RiMoneyDollarCircleFill size={25} />
+  }
+]
+
+export function Main({ children, title, footerType, logout, mainClass, margin }: Main) {
+  const { user, authLoading } = useAuthStore()
+
+  const map = useMemo(() => {
+    if (logout && !user && !authLoading) return footerMapLogout
+    return footerMap
+  }, [logout, user, authLoading])
+
+  if (authLoading) return null
+
   return (
     <>
-      <div className="bg-amber-300 px-2 h-12 justify-between items-center flex gap-2 fixed top-0 w-full">
-        <p className="text-xl font-bold">{title}</p>
-        <MdLogout className="cursor-pointer" size={30} onClick={logout} />
+      <div className={`${color.main.normal} px-2 h-12 items-center flex gap-2 fixed top-0 w-full`}>
+        <IoMdMenu size={35} className={`cursor-pointer p-1 ${color.main.hover} transition rounded-md hidden md:block`} />
+        <p className="text-xl p-1 font-bold z-50">{title}</p>
+
+        {(!logout || (logout === true && user)) && (
+          <MdLogout
+            className={`cursor-pointer p-1 ml-auto ${color.main.hover} transition rounded-md`}
+            size={35}
+            onClick={logoutFunc}
+          />
+        )}
       </div>
 
-      <div className="pt-12 pb-19 md:pb-0">
+      <div className={`${!margin && "pt-12 pb-20 md:pb-0"} ${mainClass}`}>
         {children}
       </div>
 
-      <div className="w-full flex justify-around px-2 h-19 items-center bg-amber-300 md:hidden fixed bottom-0">
-        {footerMap.map((item) => (
-          <Link key={item.footerType} to={item.to} className={`flex flex-col items-center cursor-pointer w-17 py-1 rounded-md ${footerType === item.footerType ? "bg-amber-400" : ""}`}>
+      <div className={`w-full flex justify-around px-2 h-20 items-center ${color.main.normal} md:hidden fixed bottom-0`}>
+        {map.map((item) => (
+          <Link key={item.footerType} to={item.to} className={`flex flex-col items-center cursor-pointer w-17 py-2 rounded-md ${footerType === item.footerType ? color.main.thick : ""}`}>
             {item.icon}
             <p className="text-sm">{item.label}</p>
           </Link>

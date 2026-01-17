@@ -1,15 +1,26 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useAuthStore } from "../../hooks/store/auth"
 import { useEffect } from "react"
 
 export function useSetupLogin() {
   const { user, authLoading } = useAuthStore()
   const navigate = useNavigate()
+  const location = useLocation()
 
-  // ログインしてないなら/loginに飛ばす
   useEffect(() => {
-    if (!user && !authLoading &&navigator.onLine) {
+    // 除外パスの設定
+    const ignorePaths = ["/qrCharge"]
+    const isIgnored = ignorePaths.some(path =>
+      location.pathname.includes(path)
+    )
+
+    if (
+      !user &&
+      !authLoading &&
+      navigator.onLine &&
+      !isIgnored
+    ) {
       navigate("/login", { replace: true })
     }
-  }, [user, navigate, authLoading])
+  }, [user, authLoading, navigate, location.pathname])
 }

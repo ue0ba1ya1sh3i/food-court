@@ -14,3 +14,8 @@
   /* bg-gray-900 */
   background: oklch(21% 0.034 264.665);
 }
+
+.firebase-emulator-warning {
+  /* 邪魔なので */
+  display: none !important;
+}

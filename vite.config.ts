@@ -9,62 +9,68 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-    tailwindcss(),
+      tailwindcss(),
 
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']]
-      }
-    }),
+      react({
+        babel: {
+          plugins: [['babel-plugin-react-compiler']]
+        }
+      }),
 
-    VitePWA({
-      registerType: "autoUpdate",
+      VitePWA({
+        registerType: "autoUpdate",
 
-      manifest: {
-        name: env.VITE_STORE_NAME,
-        short_name: "Food Court",
-        description: env.DESCRIPTION,
-        theme_color: `#${env.VITE_COLOR}`,
-        background_color: `#${env.VITE_COLOR}`,
-        display: "standalone",
-        start_url: "/",
+        manifest: {
+          name: env.VITE_STORE_NAME,
+          short_name: "Food Court",
+          description: env.DESCRIPTION,
+          theme_color: `#${env.VITE_COLOR}`,
+          background_color: `#${env.VITE_COLOR}`,
+          display: "standalone",
+          start_url: "/",
 
-        icons: [
-          {
-            "purpose": "maskable",
-            "sizes": "48x48",
-            "src": "/files/icons/x48.png",
-            "type": "image/png"
-          },
+          icons: [
+            {
+              "purpose": "maskable",
+              "sizes": "48x48",
+              "src": "/files/icons/x48.png",
+              "type": "image/png"
+            },
 
-          {
-            "purpose": "maskable",
-            "sizes": "96x96",
-            "src": "/files/icons/x96.png",
-            "type": "image/png"
-          },
+            {
+              "purpose": "maskable",
+              "sizes": "96x96",
+              "src": "/files/icons/x96.png",
+              "type": "image/png"
+            },
 
-          {
-            "purpose": "maskable",
-            "sizes": "192x192",
-            "src": "/files/icons/x192.png",
-            "type": "image/png"
-          },
+            {
+              "purpose": "maskable",
+              "sizes": "192x192",
+              "src": "/files/icons/x192.png",
+              "type": "image/png"
+            },
 
-          {
-            "purpose": "maskable",
-            "sizes": "512x512",
-            "src": "/files/icons/x512.png",
-            "type": "image/png"
-          }
-        ]
-      }
-    }),
+            {
+              "purpose": "maskable",
+              "sizes": "512x512",
+              "src": "/files/icons/x512.png",
+              "type": "image/png"
+            }
+          ]
+        }
+      }),
 
-    sentryVitePlugin({
-      org: env.SENTRY_ORG,
-      project: env.SENTRY_PROJECT
-    })],
+      sentryVitePlugin({
+        org: env.SENTRY_ORG,
+        project: env.SENTRY_PROJECT
+      })
+    ],
+
+    server: {
+      host: true,
+      port: 5173
+    },
 
     build: {
       sourcemap: true,

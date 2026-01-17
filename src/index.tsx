@@ -6,6 +6,9 @@ import { createRoot } from 'react-dom/client'
 import Root from "./pages/root"
 import Login from "./pages/login"
 import Offline from "./pages/offline"
+import Admin from "./pages/admin"
+import QrCharge from "./pages/qrCharge"
+import Charge from "./pages/charge"
 
 // その他もろもろ
 import './css/index.css'
@@ -20,6 +23,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<Root />} />
           <Route path="/login" element={<Login />} />
           <Route path="/offline" element={<Offline />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/qrCharge" element={<QrCharge />} />
+          <Route path="/charge" element={<Charge />} />
         </Routes>
       </Setup>
     </BrowserRouter>

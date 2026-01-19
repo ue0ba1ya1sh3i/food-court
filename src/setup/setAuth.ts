@@ -2,6 +2,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../lib/firebase'
 import { useAuthStore } from '../hooks/store/auth'
 import * as sentry from "@sentry/react"
+import { sendLog } from '../lib/sentry'
 
 const { setUser, setAuthLoading } = useAuthStore.getState()
 
@@ -15,7 +16,10 @@ onAuthStateChanged(auth, (user) => {
       id: user.uid,
       email: user.email ?? undefined,
     })
+    
+    sendLog("main", "login", "log")
   } else {
+    sendLog("main", "logout", "log")
     sentry.setUser(null)
   }
 

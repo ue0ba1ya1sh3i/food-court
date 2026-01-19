@@ -6,13 +6,11 @@
   "scripts": {
     "dev": "vite",
     "dev:emulator": "cross-env VITE_FIREBASE_EMULATOR=on npm run dev",
-    "dev:functions": "npm --prefix ./functions run dev",
     "emulator": "firebase emulators:start --only hosting,firestore,auth,storage,functions",
     "build": "tsc -b && vite build",
-    "confirm": "npm run build && firebase emulators:start --only hosting",
     "lint": "eslint .",
-    "relase": "npm run build && firebase deploy",
-    "relase:hosting": "npm run build && firebase deploy --only hosting"
+    "release": "npm run build && firebase deploy",
+    "release:hosting": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@sentry/react": "^10.33.0",

@@ -20,7 +20,7 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const firestore = getFirestore(app)
 const storage = getStorage(app)
-const functions = getFunctions(app)
+const functions = getFunctions(app, "asia-northeast2")
 
 // 開発モードならエミュレーターに接続
 if (import.meta.env.DEV && import.meta.env.VITE_FIREBASE_EMULATOR === "on") {

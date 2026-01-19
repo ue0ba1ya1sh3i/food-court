@@ -13,8 +13,10 @@ export default function App() {
     async function changePass() {
       if (!authLoading) {
         // ロールの取得
-        const tokenResult = await user?.getIdTokenResult()
+        const tokenResult = await user?.getIdTokenResult(true)
         const role = tokenResult?.claims.role
+
+        console.log(role)
 
         // 判断
         switch (role) {

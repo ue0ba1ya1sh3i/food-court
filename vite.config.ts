@@ -1,8 +1,9 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { defineConfig, loadEnv } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { VitePWA } from 'vite-plugin-pwa'
+import path from "path"
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -24,8 +25,8 @@ export default defineConfig(({ mode }) => {
           name: env.VITE_STORE_NAME,
           short_name: "Food Court",
           description: env.DESCRIPTION,
-          theme_color: `#${env.VITE_COLOR}`,
-          background_color: `#${env.VITE_COLOR}`,
+          theme_color: "#F3F4F6",
+          background_color: "#F3F4F6",
           display: "standalone",
           start_url: "/",
 
@@ -75,6 +76,12 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: true,
       chunkSizeWarningLimit: 1000
+    },
+
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
     }
   }
 })

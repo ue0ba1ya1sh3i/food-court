@@ -1,7 +1,13 @@
-node_modules/
-dist/
-.env
-.firebaserc
+# 不要
+dist
+node_modules
 *.log
+emulator-data
+
+# 環境変数系
+.firebaserc
+.env
 .env.sentry-build-plugin
+
+# .firebaseにでてくるやつ
 *.cache

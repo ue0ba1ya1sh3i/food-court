@@ -7,7 +7,7 @@ export default function App() {
 
   return (
     <Main title="チャージ" footerType="charge">
-      <QRCodeSVG value="https://food-court-ue0ba1ya1sh3i.web.app/charge/id" className="size-64" bgColor="transparent" level="L" />
+      <QRCodeSVG value="https://food-court-ue0ba1ya1sh3i.web.app/qrCharge/id" className="size-64" bgColor="transparent" level="L" />
       <button onClick={() => navigate("/qrCharge")}>QR charge</button>
     </Main>
   )

@@ -8,6 +8,7 @@
       "ignore": [
         "node_modules",
         ".git",
+        ".gitignore",
         "*.log"
       ],
 
@@ -82,6 +83,9 @@
       "enabled": true
     },
 
-    "singleProjectMode": true
+    "singleProjectMode": true,
+
+    "exportOnExit": true,
+    "import": "emulator-data"
   }
 }

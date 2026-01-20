@@ -10,13 +10,11 @@
   - [使用技術](#使用技術)
 - [セットアップ](#セットアップ)
   - [Node.jsとJavaのインストール](#nodejsとjavaのインストール)
-  - [Firebase CLIのインストール](#firebase-cliのインストール)
   - [Firebaseにログイン&プロジェクトの作成](#firebaseにログインプロジェクトの作成)
+  - [Sentryプロジェクトの作成](#sentryプロジェクトの作成)
   - [プロジェクトのクローン](#プロジェクトのクローン)
   - [ライブラリのインストール](#ライブラリのインストール)
-  - [環境変数の設定](#環境変数の設定)
-  - [.env.sentry-build-pluginの記入](#envsentry-build-pluginの記入)
-  - [.firebasercの記入](#firebasercの記入)
+  - [セットアップコマンドの実行](#セットアップコマンドの実行)
 - [ビルド&デプロイ](#ビルドデプロイ)
   - [アイコンの設定](#アイコンの設定)
   - [ビルド(非推奨)](#ビルド非推奨)
@@ -76,6 +74,9 @@
   - `firebase login`でFirebase CLIにログインしてください
   - そのあとログインしたアカウントでFirebaseのプロジェクトを作成し、Hosting Functions Storage Auth Firestoreをすべて有効にしてください
 
+- ### Sentryプロジェクトの作成
+  - Sentryプロジェクトを作成してAPIキーなどをメモしておいてください。(後のセットアップコマンドで使います)
+
 - ### プロジェクトのクローン
   - git cloneコマンドなどでプロジェクトをコピーしてください
 
@@ -83,41 +84,8 @@
   - プロジェクト直下で`npm install`をし、ライブラリをインストールしてください
   - 忘れずに/functionsのほうも`npm install`してください
 
-- ### 環境変数の設定
-  - 次のコードを参考に環境変数を設定してください
-
-  ```
-  VITE_STORE_NAME=「名前」
-  VITE_COLOR=「#抜きで16進数のカラーコード」
-  DESCRIPTION=「説明」
-
-  # Firebase
-  VITE_FIREBASE_API_KEY=XXXX
-  VITE_FIREBASE_AUTH_DOMAIN=XXXX
-  VITE_FIREBASE_PROJECT_ID=XXXX
-  VITE_FIREBASE_STORAGE_BUCKET=XXXX
-  VITE_FIREBASE_MESSAGING_SENDER_ID=XXXX
-  VITE_FIREBASE_APP_ID=XXXX
-  VITE_FIREBASE_MEASUREMENT_ID=XXXX
-
-  # Sentry
-  VITE_SENTRY_DSN=「SentryのDSNのURL」
-  SENTRY_ORG=「Sentryのチーム名」
-  SENTRY_PROJECT=「Sentryのプロジェクト名」
-  ```
-
-- ### .env.sentry-build-pluginの記入
-  - `SENTRY_AUTH_TOKEN=「ここにトークン」`みたいにトークンを記入してください
-
-- ### .firebasercの記入
-  - 以下のようなコードを.firebasercというファイルを作成して記入してください
-  ```json
-  {
-    "projects": {
-      "default": "「ここにプロジェクトID」"
-    }
-  }
-  ```
+- ### セットアップコマンドの実行
+  - `npm run setup`を実行し、あとは書いてある通りに設定してください
 
 ## 起動
 - ### エミュレーターの使用

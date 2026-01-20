@@ -1,6 +1,0 @@
-エイリアス
-Firestore indexesの設定
-Firebaseルール
-環境変数なかったらおこる
-/publicでログアウトでも使えるやつ一括管理
-/src掃除

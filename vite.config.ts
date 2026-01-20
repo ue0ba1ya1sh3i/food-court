@@ -8,6 +8,27 @@ import path from "path"
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
+  // envの確認
+  const reqireEnv = [
+    "VITE_STORE_NAME",
+    "DESCRIPTION",
+    "VITE_FIREBASE_API_KEY",
+    "VITE_FIREBASE_AUTH_DOMAIN",
+    "VITE_FIREBASE_PROJECT_ID",
+    "VITE_FIREBASE_STORAGE_BUCKET",
+    "VITE_FIREBASE_MESSAGING_SENDER_ID",
+    "VITE_FIREBASE_APP_ID",
+    "VITE_FIREBASE_MEASUREMENT_ID",
+    "SENTRY_ORG",
+    "SENTRY_PROJECT"
+  ]
+
+  for (const key of reqireEnv) {
+    if (!env[key]) {
+      throw new Error(`Environment variable ${key} is required but not defined.`)
+    }
+  }
+
   return {
     plugins: [
       tailwindcss(),

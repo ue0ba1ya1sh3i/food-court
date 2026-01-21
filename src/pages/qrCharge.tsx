@@ -1,12 +1,12 @@
-import { Main } from "../component/main"
+import { MainComponent } from "../component/main"
 import { useSetup } from "../hooks/setup"
 import { BrowserMultiFormatReader } from "@zxing/browser"
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { sendError } from "../lib/sentry"
-import { Button } from "../component/button"
+import { ButtonComponent } from "../component/button"
 
-export default function App() {
+export function QrChargePage() {
   const navigate = useNavigate()
   const [cameraText, setCameraText] = useState<string>("Chrome Bookに表示されているQRコードを読み込んでください")
   const [isCameraReady, setIsCameraReady] = useState<boolean>(false)
@@ -75,16 +75,16 @@ export default function App() {
   }, [allowDomain, navigate, isCameraReady])
 
   return (
-    <Main title="QRチャージ" footerType="charge" logout={true} noMargin={true}>
+    <MainComponent title="QRチャージ" footerType="charge" logout={true} noMargin={true}>
       <div className="flex flex-col gap-2 items-center text-center p-5 min-h-dvh justify-center">
         <p className="text-xl font-bold">QRコードからチャージ</p>
         <video ref={videoRef} className="w-60 aspect-square object-cover rounded-xl border" muted playsInline />
         <p className="text-xs">{cameraText}</p>
 
         {!isCameraReady && (
-          <Button onClick={() => setIsCameraReady(true)}>カメラの起動</Button>
+          <ButtonComponent onClick={() => setIsCameraReady(true)}>カメラの起動</ButtonComponent>
         )}
       </div>
-    </Main>
+    </MainComponent>
   )
 }

@@ -1,7 +1,7 @@
 import { useSetup } from "../hooks/setup"
 import { storeName } from "../lib/env"
 
-export default function App() {
+export function OfflinePage() {
   useSetup("main", "オフラインです")
 
   return (

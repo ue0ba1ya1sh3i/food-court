@@ -74,7 +74,7 @@ const footerMapLogout: FooterMap = [
   }
 ]
 
-export function Main({ children, title, footerType, logout, mainClass, noMargin }: Main) {
+export function MainComponent({ children, title, footerType, logout, mainClass, noMargin }: Main) {
   const { user, authLoading } = useAuthStore()
 
   const map = useMemo(() => {

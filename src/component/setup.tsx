@@ -5,7 +5,7 @@ import { useBackgroundClass } from "../hooks/store/background"
 import { useSetupLogin } from "../setup/hooks/login"
 import { useSetupOffline } from "../setup/hooks/offline"
 
-export function Setup({ children }: { children: React.ReactNode }) {
+export function SetupComponent({ children }: { children: React.ReactNode }) {
   const { backgroundClass } = useBackgroundClass()
 
   // セットアップhooksを実行

@@ -6,7 +6,7 @@ type Button = {
   onClick: () => void
 }
 
-export function Button({ onClick, children }: Button) {
+export function ButtonComponent({ onClick, children }: Button) {
   return (
     <button onClick={onClick} className={`${color.main.normal} px-3 py-2 rounded-md ${color.main.hover} transition cursor-pointer`}>{children}</button>
   )

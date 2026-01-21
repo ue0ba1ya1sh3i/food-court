@@ -2,40 +2,40 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-// パスのコンポーネント
-import Root from "./pages/root"
-import Login from "./pages/login"
-import Offline from "./pages/offline"
-import Admin from "./pages/admin"
-import QrCharge from "./pages/qrCharge"
-import Charge from "./pages/charge"
-import SetAdmin from "./pages/setAdmin"
-import AdminDashboard from "./pages/adminDashboard"
+// ページコンポーネント
+import { RootPage } from "@/pages/root"
+import { LoginPage } from "@/pages/login"
+import { OfflinePage} from "@/pages/offline"
+import { AdminPage } from "@/pages/admin"
+import { QrChargePage } from "@/pages/qrCharge"
+import { ChargePage } from "@/pages/charge"
+import { SetAdminPage } from "@/pages/setAdmin"
+import { AdminDashBoardPage } from "@/pages/adminDashboard"
 
 // その他もろもろ
-import './css/index.css'
-import './setup'
-import { Setup } from "./component/setup"
+import '@/css/index.css'
+import '@/setup'
+import { SetupComponent } from "@/component/setup"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <Setup>
+      <SetupComponent>
         <Routes>
-          <Route path="/" element={<Root />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/offline" element={<Offline />} />
-          <Route path="/charge" element={<Charge />} />
+          <Route path="/" element={<RootPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/offline" element={<OfflinePage />} />
+          <Route path="/charge" element={<ChargePage />} />
 
           {/* ログインしなくても使える */}
-          <Route path="/qrCharge" element={<QrCharge />} />
-          <Route path="/setAdmin" element={<SetAdmin />} />
+          <Route path="/qrCharge" element={<QrChargePage />} />
+          <Route path="/setAdmin" element={<SetAdminPage />} />
 
           {/* 管理関係 */}
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/dashboard" element={<AdminDashBoardPage />} />
         </Routes>
-      </Setup>
+      </SetupComponent>
     </BrowserRouter>
   </StrictMode>
 )

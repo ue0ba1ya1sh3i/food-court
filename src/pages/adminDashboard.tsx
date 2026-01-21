@@ -1,4 +1,4 @@
-export default function App() {
+export function AdminDashBoardPage() {
   return (
     <>It works!</>
   )

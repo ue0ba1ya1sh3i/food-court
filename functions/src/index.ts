@@ -29,6 +29,7 @@ export const setAdmin = onCall(async (request) => {
 
   // 既に設定されてたら...お前ハッカーやな！
   if (adminSetup.data()?.done === true) {
+    // ?を使ってるが、ここに来る時点でuserは存在しているはずなので問題ない...はず！
     logger.warn("Admin role already set", { uid: adminSetup.data()?.uid })
     throw new Error("Admin role already set")
   }

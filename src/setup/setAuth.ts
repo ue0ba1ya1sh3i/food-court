@@ -4,6 +4,7 @@ import { useAuthStore } from '../hooks/store/auth'
 import * as sentry from "@sentry/react"
 import { sendLog } from '../lib/sentry'
 
+// 普通の関数なのでgetState()
 const { setUser, setAuthLoading } = useAuthStore.getState()
 
 // ログイン・ログアウトするとuserを設定して動的に変わるように

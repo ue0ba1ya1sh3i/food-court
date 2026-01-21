@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { useSetup } from "../hooks/setup"
 import { sendError } from "../lib/sentry"
 
-export default function App() {
+export function LoginPage() {
   const navigate = useNavigate()
   const { user } = useAuthStore()
 

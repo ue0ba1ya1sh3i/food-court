@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSetup } from "../hooks/setup"
 
-export default function App() {
+export function AdminPage() {
   const { authLoading, user } = useAuthStore()
   const navigate = useNavigate()
 

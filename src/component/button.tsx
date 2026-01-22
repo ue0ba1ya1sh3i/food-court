@@ -1,5 +1,4 @@
 import React from "react"
-import { color } from "../lib/color"
 
 type Button = {
   children: React.ReactNode,
@@ -8,6 +7,6 @@ type Button = {
 
 export function ButtonComponent({ onClick, children }: Button) {
   return (
-    <button onClick={onClick} className={`${color.main.normal} px-3 py-2 rounded-md ${color.main.hover} transition cursor-pointer`}>{children}</button>
+    <button onClick={onClick} className={`bg-side-main text-side-font hover:bg-side-sub px-3 py-2 rounded-md transition cursor-pointer`}>{children}</button>
   )
 }

@@ -1,6 +1,5 @@
-import { getFunctions, httpsCallable } from "firebase/functions"
-
-const functions = getFunctions()
+import { httpsCallable } from "firebase/functions"
+import { functions } from "@/lib"
 
 const setAdmin = httpsCallable(functions, "setAdmin")
 

@@ -1,3 +1,4 @@
+import { sendLog } from "@/lib"
 import { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 
@@ -7,12 +8,14 @@ export function useOfflineSetup() {
 
   const handleOffline = () => {
     if (location.pathname !== "/offline") {
+      sendLog("Internet: offline")
       navigate("/offline")
     }
   }
 
   const handleOnline = () => {
     if (location.pathname === "/offline") {
+      sendLog("Internet: online")
       navigate("/")
     }
   }

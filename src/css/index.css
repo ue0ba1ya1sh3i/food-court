@@ -1,4 +1,20 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-main: #e94a4a;
+  --theme-sub: #ef3838;
+  --theme-font: #e5e5e5;
+
+
+  --main-main: #f0f0f0;
+  --main-font: #1a1a1a;
+
+  --side-main: #ffd230;
+  --side-sub: #fcff49;
+  --side-font: #1a1a1a;
+}
 
 ::-webkit-scrollbar {
   /* w-8 */
@@ -6,13 +22,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  /* bg-amber-300 */
-  background: oklch(87.9% 0.169 91.605);
+  background: var(--side-main);
 }
 
 ::-webkit-scrollbar-thumb {
-  /* bg-gray-900 */
-  background: oklch(21% 0.034 264.665);
+  background: var(--side-font);
 }
 
 .firebase-emulator-warning {

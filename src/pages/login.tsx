@@ -37,11 +37,13 @@ export function LoginPage() {
   }, [user, navigate])
 
   return (
-    <div className="min-h-dvh flex flex-col items-center gap-4 justify-center">
-      <p className="text-4xl font-bold text-center">{storeName}</p>
-      <div className="flex gap-4 text-2xl font-bold">
-        <button className="border-b-2 cursor-pointer" onClick={handleLogin}>ログイン</button>
-        <button className="border-b-2 cursor-pointer" onClick={() => navigate("/public/qr")}>QRチャージ</button>
+    <div className="min-h-dvh flex flex-col items-center justify-center">
+      <div className="gap-4 flex flex-col px-10 rounded-xl bg-theme-sub py-20">
+        <p className="text-4xl font-bold text-center">{storeName}</p>
+        <div className="flex flex-col gap-4 text-2xl font-bold items-center">
+          <button className="border-b-2 cursor-pointer w-max" onClick={handleLogin}>ログイン</button>
+          <button className="border-b-2 cursor-pointer w-max" onClick={() => navigate("/public/qr")}>QRチャージ</button>
+        </div>
       </div>
     </div>
   )

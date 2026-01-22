@@ -1,13 +1,11 @@
-import { sentryVitePlugin } from '@sentry/vite-plugin'
-import { defineConfig, loadEnv } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { sentryVitePlugin } from "@sentry/vite-plugin"
+import { defineConfig, loadEnv } from "vite"
+import { VitePWA } from "vite-plugin-pwa"
+import react from "@vitejs/plugin-react"
 import path from "path"
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-
+  const env = loadEnv(mode, process.cwd(), "")
   // envの確認
   const reqireEnv = [
     "VITE_STORE_NAME",
@@ -31,11 +29,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-      tailwindcss(),
-
       react({
         babel: {
-          plugins: [['babel-plugin-react-compiler']]
+          plugins: [["babel-plugin-react-compiler"]]
         }
       }),
 

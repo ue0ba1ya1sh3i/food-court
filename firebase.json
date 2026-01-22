@@ -84,7 +84,6 @@
     },
 
     "singleProjectMode": true,
-
     "exportOnExit": true,
     "import": "emulator-data"
   }

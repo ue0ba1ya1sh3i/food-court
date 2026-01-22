@@ -80,7 +80,7 @@ export function QrPage() {
     <MainComponent title="QRチャージ" footerType="charge" logout={true} noMargin={true}>
       <div className="flex flex-col gap-2 items-center text-center p-5 min-h-dvh justify-center">
         <p className="text-xl font-bold">QRコードからチャージ</p>
-        <video ref={videoRef} className="w-60 aspect-square object-cover rounded-xl bg-gray-400" muted playsInline />
+        <video ref={videoRef} className="w-60 aspect-square object-cover rounded-xl bg-gray-300" muted playsInline />
         <p className="text-xs">{cameraText}</p>
 
         {!isCameraReady && (

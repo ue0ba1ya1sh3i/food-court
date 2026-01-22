@@ -6,7 +6,7 @@ import { RootPage, LoginPage, OfflinePage, AdminPage, QrPage, ChargePage, SetAdm
 // その他もろもろ
 import '@/css/index.css'
 import '@/setup'
-import { SetupComponent } from "@/component/setup"
+import { SetupComponent } from "@/component"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

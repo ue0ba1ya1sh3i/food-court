@@ -1,7 +1,6 @@
 import * as sentry from "@sentry/react"
-import type { SeverityLevel } from "@sentry/core"
 
-function sendError(error: Error) {
+function sendError(error: unknown) {
   if (!import.meta.env.DEV) {
     sentry.captureException(error)
   } else {
@@ -10,18 +9,15 @@ function sendError(error: Error) {
 }
 
 function sendLog(
-  category: string,
-  message: string,
-  level: SeverityLevel
+  message: string
 ) {
   if (!import.meta.env.DEV) {
     sentry.addBreadcrumb({
-      category,
-      message,
-      level,
+      category: "main",
+      message
     })
   } else {
-    console.log(`${category}-${level}: ${message}`)
+    console.log(message)
   }
 }
 

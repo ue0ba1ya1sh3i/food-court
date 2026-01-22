@@ -6,7 +6,7 @@
   "scripts": {
     "setup": "node scripts/setup.js",
     "dev": "vite",
-    "dev:emulator": "cross-env VITE_FIREBASE_EMULATOR=on npm run dev",
+    "dev:emulator": "cross-env VITE_FIREBASE_EMULATOR=true npm run dev",
     "emulator": "firebase emulators:start --only hosting,firestore,auth,storage,functions",
     "build": "tsc -b && vite build",
     "release": "npm run build && firebase deploy",
@@ -15,7 +15,6 @@
   "dependencies": {
     "@sentry/react": "^10.33.0",
     "@sentry/vite-plugin": "^4.6.1",
-    "@tailwindcss/vite": "^4.1.18",
     "@zxing/browser": "^0.1.5",
     "chalk": "^5.6.2",
     "figlet": "^1.9.4",
@@ -28,7 +27,6 @@
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.11.0",
-    "tailwindcss": "^4.1.18",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
@@ -37,9 +35,12 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "autoprefixer": "^10.4.23",
     "babel-plugin-react-compiler": "^1.0.0",
     "cross-env": "^10.1.0",
     "globals": "^16.5.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",

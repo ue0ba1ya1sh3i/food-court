@@ -1,7 +1,6 @@
-import { MainComponent } from "@/component/main"
-import { ButtonComponent } from "@/component/button"
-import { useAuthStore } from "@/hooks/store/auth"
-import { setAdmin } from "@/lib/functions"
+import { ButtonComponent, MainComponent } from "@/component"
+import { useAuthStore } from "@/hooks/store"
+import { sendError, setAdmin } from "@/lib"
 
 export function SetAdminPage() {
   const { user } = useAuthStore()
@@ -18,10 +17,9 @@ export function SetAdminPage() {
             await setAdmin(user?.uid)
 
             // TODO: ここにダイアログで成功表示
-            console.log("success")
           } catch(error) {
             // TODO: ここにダイアログでエラー表示
-            console.error(error)
+            sendError(error)
           }
         }}>付与(既に1回付与した場合は失敗します)</ButtonComponent>
       </div>

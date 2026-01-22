@@ -8,7 +8,6 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri"
 import { MdLogout } from "react-icons/md"
 import { logout as logoutFunc } from "../lib/logout"
 import { useAuthStore } from "../hooks/store/auth"
-import { color } from "../lib/color"
 
 type FooterType = "home" | "menu" | "charge" | "settings"
 
@@ -17,7 +16,6 @@ type Main = {
   title: string
   footerType: FooterType,
   logout?: boolean,
-  mainClass?: string,
   noMargin?: boolean
 }
 
@@ -74,7 +72,7 @@ const footerMapLogout: FooterMap = [
   }
 ]
 
-export function MainComponent({ children, title, footerType, logout, mainClass, noMargin }: Main) {
+export function MainComponent({ children, title, footerType, logout, noMargin }: Main) {
   const { user, authLoading } = useAuthStore()
 
   const map = useMemo(() => {
@@ -86,26 +84,22 @@ export function MainComponent({ children, title, footerType, logout, mainClass, 
 
   return (
     <>
-      <div className={`${color.main.normal} px-2 h-12 items-center flex gap-2 fixed top-0 w-full`}>
-        <IoMdMenu size={35} className={`cursor-pointer p-1 ${color.main.hover} transition rounded-md hidden md:block`} />
+      <div className="bg-side-main text-side-font px-2 h-12 items-center flex gap-2 fixed top-0 w-full">
+        <IoMdMenu size={35} className="cursor-pointer p-1 bg-side-main hover:bg-side-sub transition rounded-md hidden md:block" />
         <p className="text-xl p-1 font-bold z-50">{title}</p>
 
         {(!logout || (logout === true && user)) && (
-          <MdLogout
-            className={`cursor-pointer p-1 ml-auto ${color.main.hover} transition rounded-md`}
-            size={35}
-            onClick={logoutFunc}
-          />
+          <MdLogout className="cursor-pointer p-1 ml-auto bg-side-main hover:bg-side-sub transition rounded-md" size={35} onClick={logoutFunc} />
         )}
       </div>
 
-      <div className={`${!noMargin && "pt-12 pb-20 md:pb-0"} ${mainClass}`}>
+      <div className={`${!noMargin && "pt-12 pb-20 md:pb-0"} `}>
         {children}
       </div>
 
-      <div className={`w-full flex justify-around px-2 h-20 items-center ${color.main.normal} md:hidden fixed bottom-0`}>
+      <div className="w-full flex justify-around px-2 h-20 items-center md:hidden fixed bottom-0 bg-side-main text-side-font">
         {map.map((item) => (
-          <Link key={item.footerType} to={item.to} className={`flex flex-col items-center cursor-pointer w-17 py-2 rounded-md ${footerType === item.footerType ? color.main.thick : ""}`}>
+          <Link key={item.footerType} to={item.to} className={`flex flex-col items-center cursor-pointer w-16 py-2 rounded-md ${footerType === item.footerType ? "bg-side-sub" : ""}`}>
             {item.icon}
             <p className="text-sm">{item.label}</p>
           </Link>

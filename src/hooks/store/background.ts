@@ -5,8 +5,8 @@ export type BackgroundType = "theme" | "main"
 
 // テーマをTailwind CSSに
 const backgroundMap: Record<BackgroundType, string> = {
-  theme: "bg-red-400 text-gray-100",
-  main: "bg-gray-100 text-gray-900"
+  theme: "bg-theme-main text-theme-font",
+  main: "bg-main-main text-main-font"
 }
 
 const useBackgroundStore = create<{

@@ -1,21 +1,25 @@
 import { MainComponent } from "../component/main"
 import { useSetup } from "../hooks/setup"
 import { BrowserMultiFormatReader } from "@zxing/browser"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { sendError } from "../lib/sentry"
 import { ButtonComponent } from "../component/button"
 
-export function QrChargePage() {
+export function QrPage() {
   const navigate = useNavigate()
   const [cameraText, setCameraText] = useState<string>("Chrome Bookに表示されているQRコードを読み込んでください")
   const [isCameraReady, setIsCameraReady] = useState<boolean>(false)
 
   useSetup("main", "QRチャージ")
 
+  // QR読み取り設定
   const videoRef = useRef<HTMLVideoElement>(null)
-  const allowPath = "/qrCharge/"
-  const allowDomain = import.meta.env.VITE_ALLOW_DOMAIN
+  const allowPath = "/public/charge/"
+  const allowDomain = useMemo(() => {
+    if (import.meta.env.DEV) return "http://localhost:5173"
+    return import.meta.env.VITE_ALLOW_DOMAIN
+  }, [])
 
   useEffect(() => {
     const reader = new BrowserMultiFormatReader()
@@ -34,7 +38,7 @@ export function QrChargePage() {
             const url = new URL(result.getText())
 
             // ドメインが違うなら引き返す
-            if (url.origin !== allowDomain) return setCameraText("無効なURLです")
+            if (url.origin !== allowDomain()) return setCameraText("無効なURLです")
 
             // パスが違うなら引き返す
             if (!url.pathname.startsWith(allowPath)) return setCameraText("許可されていないパスです")
@@ -78,7 +82,7 @@ export function QrChargePage() {
     <MainComponent title="QRチャージ" footerType="charge" logout={true} noMargin={true}>
       <div className="flex flex-col gap-2 items-center text-center p-5 min-h-dvh justify-center">
         <p className="text-xl font-bold">QRコードからチャージ</p>
-        <video ref={videoRef} className="w-60 aspect-square object-cover rounded-xl border" muted playsInline />
+        <video ref={videoRef} className="w-60 aspect-square object-cover rounded-xl bg-gray-400" muted playsInline />
         <p className="text-xs">{cameraText}</p>
 
         {!isCameraReady && (

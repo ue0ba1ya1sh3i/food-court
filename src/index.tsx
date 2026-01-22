@@ -7,7 +7,7 @@ import { RootPage } from "@/pages/root"
 import { LoginPage } from "@/pages/login"
 import { OfflinePage} from "@/pages/offline"
 import { AdminPage } from "@/pages/admin"
-import { QrChargePage } from "@/pages/qrCharge"
+import { QrPage } from "@/pages/qr"
 import { ChargePage } from "@/pages/charge"
 import { SetAdminPage } from "@/pages/setAdmin"
 import { AdminDashBoardPage } from "@/pages/adminDashboard"
@@ -28,10 +28,10 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/charge" element={<ChargePage />} />
 
           {/* ログインしなくても使える */}
-          <Route path="/qrCharge" element={<QrChargePage />} />
-          <Route path="/setAdmin" element={<SetAdminPage />} />
+          <Route path="/public/qr" element={<QrPage />} />
 
           {/* 管理関係 */}
+          <Route path="/setAdmin" element={<SetAdminPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/dashboard" element={<AdminDashBoardPage />} />
         </Routes>

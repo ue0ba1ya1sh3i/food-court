@@ -7,7 +7,7 @@ import { execSync } from "child_process"
 
 const run = (cmd, silent = true) => {
   try {
-    //　同期的にコマンド実行して成功したならtrue返す
+    // 同期的にコマンド実行して成功したならtrue返す
     execSync(cmd, { stdio: silent ? "ignore" : "inherit" })
     return true
   } catch {
@@ -57,11 +57,11 @@ async function setEnv() {
     console.log(chalk.blue("Please setup Sentry project at https://sentry.io"))
 
     const env = await prompts([
-      // App config
       { type: "text", name: "name", message: "Store name" },
       { type: "text", name: "description", message: "Description" },
+      { type: "text", name: "allowDomain", message: "Allow domain" }
 
-      // Firebase config
+      // Firebase
       { type: "text", name: "apiKey", message: "Firebase API Key" },
       { type: "text", name: "authDomain", message: "Firebase Auth Domain" },
       { type: "text", name: "projectId", message: "Firebase Project ID" },
@@ -70,7 +70,7 @@ async function setEnv() {
       { type: "text", name: "appId", message: "Firebase App ID" },
       { type: "text", name: "measurementId", message: "Firebase Measurement ID" },
 
-      // Sentry config
+      // Sentry
       { type: "text", name: "sentryDsn", message: "Sentry DSN" },
       { type: "text", name: "sentryOrg", message: "Sentry Org" },
       { type: "text", name: "sentryProject", message: "Sentry Project" },
@@ -79,7 +79,7 @@ async function setEnv() {
     // .envファイルの作成
     const envLines = [
       `VITE_STORE_NAME=${env.name}`,
-      `VITE_COLOR=${env.theme}`,
+      `VITE_ALLOW_DOMAIN=${env.allowDomain}`,
       `DESCRIPTION=${env.description}`,
       ``,
       `# Firebase`,

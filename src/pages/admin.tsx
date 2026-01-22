@@ -12,11 +12,9 @@ export function AdminPage() {
   useEffect(() => {
     async function changePass() {
       if (!authLoading) {
-        // ロールの取得
+        // 強制ロール取得
         const tokenResult = await user?.getIdTokenResult(true)
         const role = tokenResult?.claims.role
-
-        console.log(role)
 
         // 判断
         switch (role) {

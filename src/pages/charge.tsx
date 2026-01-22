@@ -8,7 +8,7 @@ export function ChargePage() {
   return (
     <MainComponent title="チャージ" footerType="charge">
       <QRCodeSVG value="https://food-court-ue0ba1ya1sh3i.web.app/qrCharge/id" className="size-64" bgColor="transparent" level="L" />
-      <button onClick={() => navigate("/qrCharge")}>QR charge</button>
+      <button onClick={() => navigate("/public/qr")}>QR charge</button>
     </MainComponent>
   )
 }

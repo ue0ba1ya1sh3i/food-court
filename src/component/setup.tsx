@@ -9,8 +9,8 @@ export function SetupComponent({ children }: { children: React.ReactNode }) {
   const { backgroundClass } = useBackgroundClass()
 
   // セットアップhooksを実行
-  useSetupLogin()
-  useSetupOffline()
+  useLoginSetup()
+  useOfflineSetup()
 
   return (
     <div className={`min-h-dvh ${backgroundClass}`}>

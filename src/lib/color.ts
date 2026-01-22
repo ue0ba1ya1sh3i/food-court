@@ -1,3 +1,5 @@
+// TODO: 色管理徹底
+
 const color = {
   main: {
     normal: "bg-green-300",

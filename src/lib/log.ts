@@ -8,9 +8,7 @@ function sendError(error: unknown) {
   }
 }
 
-function sendLog(
-  message: string
-) {
+function sendLog(message: string) {
   if (!import.meta.env.DEV) {
     sentry.addBreadcrumb({
       category: "main",

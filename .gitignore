@@ -2,12 +2,9 @@
 dist
 node_modules
 *.log
-emulator-data
+.firebase/*.cache
 
 # 環境変数系
 .firebaserc
 .env
 .env.sentry-build-plugin
-
-# .firebaseにでてくるやつ
-*.cache

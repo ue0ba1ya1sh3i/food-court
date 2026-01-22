@@ -6,7 +6,7 @@ import { IoMdMenu, IoMdSettings } from "react-icons/io"
 import { Link } from "react-router-dom"
 import { RiMoneyDollarCircleFill } from "react-icons/ri"
 import { MdLogout } from "react-icons/md"
-import { logout as logoutFunc } from "../lib/logout"
+import { logout as logoutFunc } from "../lib/auth"
 import { useAuthStore } from "../hooks/store/auth"
 
 type FooterType = "home" | "menu" | "charge" | "settings"

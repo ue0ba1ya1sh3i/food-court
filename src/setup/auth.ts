@@ -14,7 +14,9 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     sentry.setUser({
       id: user.uid,
-      email: user.email ?? undefined,
+
+      // 絶対あると思うけどね★
+      email: user.email || undefined,
     })
     
     sendLog("Now auth status: login")
@@ -23,6 +25,6 @@ onAuthStateChanged(auth, (user) => {
     sentry.setUser(null)
   }
 
-  // これはログインが完了したらローディングも消すということ
+  // ログインが完了したらローディングも消す
   setAuthLoading(false)
 })

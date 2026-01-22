@@ -1,5 +1,5 @@
 import * as admin from "firebase-admin"
-import { onCall } from "firebase-functions/v2/https"
+import { onCall, HttpsError } from "firebase-functions/v2/https"
 import { logger } from "firebase-functions"
 import { setGlobalOptions } from "firebase-functions/v2"
 
@@ -20,7 +20,7 @@ export const setAdmin = onCall(async (request) => {
   // UIDがなかったら...てかそれやったらどうやって君来たん？
   if (!uid) {
     logger.warn("Not login access")
-    throw new Error("Not login")
+    throw new HttpsError("unauthenticated", "NOT_LOGIN")
   }
 
   // ドキュメントの取得
@@ -31,7 +31,7 @@ export const setAdmin = onCall(async (request) => {
   if (adminSetup.data()?.done === true) {
     // ?を使ってるが、ここに来る時点でuserは存在しているはずなので問題ない...はず！
     logger.warn("Admin role already set", { uid: adminSetup.data()?.uid })
-    throw new Error("Admin role already set")
+    throw new HttpsError("failed-precondition", "ALREADY_SET");
   }
 
   // 管理者ロールの付与
@@ -40,5 +40,5 @@ export const setAdmin = onCall(async (request) => {
 
   // ログ出して終了
   logger.info("Admin role set", { uid })
-  return { message: "Admin set successfully" }
+  return { message: "SUCCESS" }
 })

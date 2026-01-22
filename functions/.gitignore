@@ -1,2 +1,4 @@
-node_modules
+# 不要
 lib
+node_modules
+*.log

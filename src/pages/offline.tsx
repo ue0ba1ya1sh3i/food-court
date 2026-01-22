@@ -1,5 +1,5 @@
-import { useSetup } from "@/hooks/setup"
-import { storeName } from "@/lib/env"
+import { useSetup } from "@/hooks"
+import { storeName } from "@/lib"
 
 export function OfflinePage() {
   useSetup("main", "オフラインです")
@@ -11,7 +11,7 @@ export function OfflinePage() {
         <p className="text-xl">現在オフラインです。ネット環境の確認をお願いします</p>
       </div>
 
-      <p className="text-md text-center">{storeName}</p>
+      <p className="text-xs text-center">{storeName}</p>
     </div>
   )
 }

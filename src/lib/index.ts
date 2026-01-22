@@ -1,5 +1,5 @@
-export { sendError, sendLog } from "./sentry"
-export { logout } from "./logout"
+export { sendError, sendLog } from "./log"
+export { logout } from "./auth"
 export { auth, firestore, functions, storage } from "./firebase"
 export { setAdmin } from "./functions"
 export { storeName, isDevMode, isFirebaseEmulator } from "./env"

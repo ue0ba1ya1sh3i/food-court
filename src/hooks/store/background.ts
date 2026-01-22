@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-// 背景テーマ
+// テーマの定義
 export type BackgroundType = "theme" | "main"
 
 // テーマをTailwind CSSに
@@ -25,4 +25,4 @@ const useBackgroundClass = function() {
   }
 }
 
-export { useBackgroundClass, useBackgroundStore}
+export { useBackgroundClass, useBackgroundStore }

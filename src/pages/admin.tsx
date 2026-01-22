@@ -1,7 +1,7 @@
-import { useAuthStore } from "@/hooks/store/auth"
+import { useAuthStore } from "@/hooks/store"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useSetup } from "@/hooks/setup"
+import { useSetup } from "@/hooks"
 
 export function AdminPage() {
   const { authLoading, user } = useAuthStore()

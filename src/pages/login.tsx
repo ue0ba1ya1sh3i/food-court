@@ -5,7 +5,17 @@ import { auth } from "@/lib/firebase"
 import { useAuthStore } from "@/hooks/store/auth"
 import { useEffect } from "react"
 import { useSetup } from "@/hooks/setup"
-import { sendError } from "@/lib/sentry"
+import { sendError } from "@/lib/log"
+import { usePwaInstall } from "@/hooks/pwa"
+
+function InstallButon() {
+  const { canInstall, install } = usePwaInstall()
+  if (!canInstall) return null
+
+  return (
+    <button className="border-b-2 cursor-pointer w-max" onClick={install}>アプリをインストール</button>
+  )
+}
 
 export function LoginPage() {
   const navigate = useNavigate()
@@ -38,11 +48,12 @@ export function LoginPage() {
 
   return (
     <div className="min-h-dvh flex flex-col items-center justify-center">
-      <div className="gap-4 flex flex-col px-10 rounded-xl bg-theme-sub py-20">
+      <div className="gap-4 flex flex-col px-10 rounded-xl bg-theme-sub py-16">
         <p className="text-4xl font-bold text-center">{storeName}</p>
         <div className="flex flex-col gap-4 text-2xl font-bold items-center">
           <button className="border-b-2 cursor-pointer w-max" onClick={handleLogin}>ログイン</button>
           <button className="border-b-2 cursor-pointer w-max" onClick={() => navigate("/public/qr")}>QRチャージ</button>
+          <InstallButon />
         </div>
       </div>
     </div>

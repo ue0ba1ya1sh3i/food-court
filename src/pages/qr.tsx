@@ -1,10 +1,9 @@
-import { MainComponent } from "@/component/main"
-import { useSetup } from "@/hooks/setup"
+import { MainComponent, ButtonComponent } from "@/component"
+import { useSetup } from "@/hooks"
 import { BrowserMultiFormatReader } from "@zxing/browser"
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { sendError } from "@/lib/sentry"
-import { ButtonComponent } from "@/component/button"
+import { sendError } from "@/lib"
 
 export function QrPage() {
   const navigate = useNavigate()
@@ -79,7 +78,7 @@ export function QrPage() {
   return (
     <MainComponent title="QRチャージ" footerType="charge" logout={true} noMargin={true}>
       <div className="flex flex-col gap-2 items-center text-center p-5 min-h-dvh justify-center">
-        <p className="text-xl font-bold">QRコードからチャージ</p>
+        <p className="text-2xl font-bold">QRコードからチャージ</p>
         <video ref={videoRef} className="w-60 aspect-square object-cover rounded-xl bg-gray-300" muted playsInline />
         <p className="text-xs">{cameraText}</p>
 

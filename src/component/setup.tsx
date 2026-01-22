@@ -1,7 +1,5 @@
 import React from "react"
-import { useBackgroundClass } from "@/hooks/store/background"
-
-// セットアップhooks
+import { useBackgroundClass } from "@/hooks/store"
 import { useLoginSetup, useOfflineSetup } from "@/setup/hooks"
 
 export function SetupComponent({ children }: { children: React.ReactNode }) {

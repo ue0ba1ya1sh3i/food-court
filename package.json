@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  
   "scripts": {
     "setup": "node scripts/setup.js",
     "dev": "vite",
@@ -12,6 +13,7 @@
     "release": "npm run build && firebase deploy",
     "release:hosting": "npm run build && firebase deploy --only hosting"
   },
+
   "dependencies": {
     "@sentry/react": "^10.33.0",
     "@sentry/vite-plugin": "^4.6.1",
@@ -29,6 +31,7 @@
     "react-router-dom": "^7.11.0",
     "zustand": "^5.0.9"
   },
+  
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",

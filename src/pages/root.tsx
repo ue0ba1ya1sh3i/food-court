@@ -1,5 +1,5 @@
-import { useSetup } from "@/hooks/setup"
-import { MainComponent } from "@/component/main"
+import { useSetup } from "@/hooks"
+import { MainComponent } from "@/component"
 import { useNavigate } from "react-router-dom"
 
 export function RootPage() {
@@ -10,6 +10,7 @@ export function RootPage() {
   return (
     <>
       <MainComponent title="ホーム" footerType="home">
+        {/* TODO: UI追加 */}
         <button onClick={() => navigate("/admin")}>Admin</button>
       </MainComponent>
     </>

@@ -1,6 +1,5 @@
-import { useBackgroundStore } from "@/hooks/store/background"
+import { useBackgroundStore, type BackgroundType } from "@/hooks/store"
 import { useEffect } from "react"
-import type { BackgroundType } from "@/hooks/store/background"
 
 export function useSetup(colorType: BackgroundType, title: string) {
   const { setBackground } = useBackgroundStore()

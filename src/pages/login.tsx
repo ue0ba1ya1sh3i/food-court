@@ -6,16 +6,6 @@ import { useAuthStore } from "@/hooks/store/auth"
 import { useEffect } from "react"
 import { useSetup } from "@/hooks/setup"
 import { sendError } from "@/lib/log"
-import { usePwaInstall } from "@/hooks/pwa"
-
-function InstallButon() {
-  const { canInstall, install } = usePwaInstall()
-  if (!canInstall) return null
-
-  return (
-    <button className="border-b-2 cursor-pointer w-max" onClick={install}>アプリをインストール</button>
-  )
-}
 
 export function LoginPage() {
   const navigate = useNavigate()
@@ -29,13 +19,9 @@ export function LoginPage() {
       const provider = new GoogleAuthProvider()
       await signInWithPopup(auth, provider)
     } catch(e) {
-      if (e instanceof Error) {
-        // そのまま通れ！
-        sendError(e)
-      } else {
-        // 文字列をError型にする
-        sendError(new Error(String(e)))
-      }
+      sendError(e)
+
+      // TODO: ここにダイアログを表示
     }
   }
 
@@ -53,7 +39,6 @@ export function LoginPage() {
         <div className="flex flex-col gap-4 text-2xl font-bold items-center">
           <button className="border-b-2 cursor-pointer w-max" onClick={handleLogin}>ログイン</button>
           <button className="border-b-2 cursor-pointer w-max" onClick={() => navigate("/public/qr")}>QRチャージ</button>
-          <InstallButon />
         </div>
       </div>
     </div>

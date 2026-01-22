@@ -1,16 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-
-// ページコンポーネント
-import { RootPage } from "@/pages/root"
-import { LoginPage } from "@/pages/login"
-import { OfflinePage} from "@/pages/offline"
-import { AdminPage } from "@/pages/admin"
-import { QrPage } from "@/pages/qr"
-import { ChargePage } from "@/pages/charge"
-import { SetAdminPage } from "@/pages/setAdmin"
-import { AdminDashBoardPage } from "@/pages/adminDashboard"
+import { RootPage, LoginPage, OfflinePage, AdminPage, QrPage, ChargePage, SetAdminPage, AdminDashboardPage } from "@/pages"
 
 // その他もろもろ
 import '@/css/index.css'
@@ -33,7 +24,7 @@ createRoot(document.getElementById('root')!).render(
           {/* 管理関係 */}
           <Route path="/setAdmin" element={<SetAdminPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/dashboard" element={<AdminDashBoardPage />} />
+          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         </Routes>
       </SetupComponent>
     </BrowserRouter>

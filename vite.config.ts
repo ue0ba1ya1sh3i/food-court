@@ -11,7 +11,6 @@ export default defineConfig(({ mode }) => {
   // envの確認
   const reqireEnv = [
     "VITE_STORE_NAME",
-    "VITE_ALLOW_DOMAIN",
     "DESCRIPTION",
     "VITE_FIREBASE_API_KEY",
     "VITE_FIREBASE_AUTH_DOMAIN",

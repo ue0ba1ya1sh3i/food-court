@@ -59,7 +59,7 @@ async function setEnv() {
     const env = await prompts([
       { type: "text", name: "name", message: "Store name" },
       { type: "text", name: "description", message: "Description" },
-      { type: "text", name: "allowDomain", message: "Allow domain" }
+      { type: "text", name: "allowDomain", message: "Allow domain" },
 
       // Firebase
       { type: "text", name: "apiKey", message: "Firebase API Key" },

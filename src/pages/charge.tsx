@@ -1,4 +1,4 @@
-import { MainComponent } from "../component/main"
+import { MainComponent } from "@/component/main"
 import { QRCodeSVG } from "qrcode.react"
 import { useNavigate } from "react-router-dom"
 

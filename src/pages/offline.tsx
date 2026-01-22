@@ -1,5 +1,5 @@
-import { useSetup } from "../hooks/setup"
-import { storeName } from "../lib/env"
+import { useSetup } from "@/hooks/setup"
+import { storeName } from "@/lib/env"
 
 export function OfflinePage() {
   useSetup("main", "オフラインです")

@@ -1,10 +1,10 @@
-import { MainComponent } from "../component/main"
-import { useSetup } from "../hooks/setup"
+import { MainComponent } from "@/component/main"
+import { useSetup } from "@/hooks/setup"
 import { BrowserMultiFormatReader } from "@zxing/browser"
-import { useEffect, useRef, useState, useMemo } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { sendError } from "../lib/sentry"
-import { ButtonComponent } from "../component/button"
+import { sendError } from "@/lib/sentry"
+import { ButtonComponent } from "@/component/button"
 
 export function QrPage() {
   const navigate = useNavigate()
@@ -16,10 +16,7 @@ export function QrPage() {
   // QR読み取り設定
   const videoRef = useRef<HTMLVideoElement>(null)
   const allowPath = "/public/charge/"
-  const allowDomain = useMemo(() => {
-    if (import.meta.env.DEV) return "http://localhost:5173"
-    return import.meta.env.VITE_ALLOW_DOMAIN
-  }, [])
+  const allowDomain = window.location.hostname
 
   useEffect(() => {
     const reader = new BrowserMultiFormatReader()
@@ -36,9 +33,10 @@ export function QrPage() {
 
             // データの取得してURL化
             const url = new URL(result.getText())
+            console.log(url.origin)
 
             // ドメインが違うなら引き返す
-            if (url.origin !== allowDomain()) return setCameraText("無効なURLです")
+            if (url.origin !== allowDomain) return setCameraText("無効なURLです")
 
             // パスが違うなら引き返す
             if (!url.pathname.startsWith(allowPath)) return setCameraText("許可されていないパスです")

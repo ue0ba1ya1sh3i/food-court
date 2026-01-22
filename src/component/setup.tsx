@@ -1,9 +1,8 @@
 import React from "react"
-import { useBackgroundClass } from "../hooks/store/background"
+import { useBackgroundClass } from "@/hooks/store/background"
 
 // セットアップhooks
-import { useSetupLogin } from "../setup/hooks/login"
-import { useSetupOffline } from "../setup/hooks/offline"
+import { useLoginSetup, useOfflineSetup } from "@/setup/hooks"
 
 export function SetupComponent({ children }: { children: React.ReactNode }) {
   const { backgroundClass } = useBackgroundClass()

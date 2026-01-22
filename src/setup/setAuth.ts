@@ -1,8 +1,8 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../lib/firebase'
-import { useAuthStore } from '../hooks/store/auth'
+import { auth } from '@/lib/firebase'
+import { useAuthStore } from '@/hooks/store/auth'
 import * as sentry from "@sentry/react"
-import { sendLog } from '../lib/sentry'
+import { sendLog } from '@/lib/sentry'
 
 // 普通の関数なのでgetState()
 const { setUser, setAuthLoading } = useAuthStore.getState()
@@ -18,9 +18,9 @@ onAuthStateChanged(auth, (user) => {
       email: user.email ?? undefined,
     })
     
-    sendLog("main", "login", "log")
+    sendLog("main", "Now auth status: login", "log")
   } else {
-    sendLog("main", "logout", "log")
+    sendLog("main", "Now auth status: logout", "log")
     sentry.setUser(null)
   }
 

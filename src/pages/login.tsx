@@ -1,11 +1,11 @@
-import { storeName } from "../lib/env"
+import { storeName } from "@/lib/env"
 import { useNavigate } from "react-router-dom"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { auth } from "../lib/firebase"
-import { useAuthStore } from "../hooks/store/auth"
+import { auth } from "@/lib/firebase"
+import { useAuthStore } from "@/hooks/store/auth"
 import { useEffect } from "react"
-import { useSetup } from "../hooks/setup"
-import { sendError } from "../lib/sentry"
+import { useSetup } from "@/hooks/setup"
+import { sendError } from "@/lib/sentry"
 
 export function LoginPage() {
   const navigate = useNavigate()

@@ -1,12 +1,13 @@
-import { MainComponent } from "../component/main"
-import { ButtonComponent } from "../component/button"
-import { useAuthStore } from "../hooks/store/auth"
-import { setAdmin } from "../lib/functions"
+import { MainComponent } from "@/component/main"
+import { ButtonComponent } from "@/component/button"
+import { useAuthStore } from "@/hooks/store/auth"
+import { setAdmin } from "@/lib/functions"
 
 export function SetAdminPage() {
   const { user } = useAuthStore()
 
   // TODO: ここでローディング機能実装
+  // TODO: ここで既にsetAdminがtrueなら/に返す
 
   return (
     <MainComponent title="管理者権限付与設定" footerType="settings" noMargin={true}>

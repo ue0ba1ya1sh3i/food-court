@@ -1,9 +1,10 @@
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth, sendLog } from '@/lib'
-import { useAuthStore } from '@/hooks/store'
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "@/lib/firebase"
+import { sendError } from "@/lib"
+import { useAuthStore } from "@/hooks/store"
 import * as sentry from "@sentry/react"
 
-// 普通の関数なのでgetState()
+// ここではhooksとして使わないのでgetState()で通常取得
 const { setUser, setAuthLoading } = useAuthStore.getState()
 
 // ログイン・ログアウトするとuserを設定して動的に変わるように
@@ -12,16 +13,18 @@ onAuthStateChanged(auth, (user) => {
 
   // ユーザーID別Sentryの監視
   if (user) {
+    // メールアドレスがなければエラー
+    if (!user.email || !user.uid) {
+      sendError(new Error("User information is missing"))
+      return
+    }
+
+    // ユーザーのセット
     sentry.setUser({
       id: user.uid,
-
-      // 絶対あると思うけどね★
-      email: user.email || undefined,
+      email: user.email
     })
-    
-    sendLog("Now auth status: login")
   } else {
-    sendLog("Now auth status: logout")
     sentry.setUser(null)
   }
 

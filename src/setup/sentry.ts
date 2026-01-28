@@ -1,5 +1,5 @@
 import * as sentry from "@sentry/react"
-import { isDevMode } from "@/lib"
+import { isDevMode } from "@/lib/env"
 
 // 開発モードならSentryを立ち上げない
 if (!isDevMode) {

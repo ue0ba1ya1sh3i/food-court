@@ -1,6 +1,4 @@
 # Food Court
-![ログイン画面のスクリーンショット](/screenShot/1.png)
-![QRコードチャージ画面のスクリーンショット](/screenShot/2.png)
 
 ## 目次
 - [概要](#概要)

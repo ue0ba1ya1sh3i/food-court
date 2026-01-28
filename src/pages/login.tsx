@@ -5,7 +5,7 @@ import { auth } from "@/lib/firebase"
 import { useAuthStore } from "@/hooks/store/auth"
 import { useEffect } from "react"
 import { useSetup } from "@/hooks/setup"
-import { sendError } from "@/lib/log"
+import { sendError } from "@/lib"
 
 export function LoginPage() {
   const navigate = useNavigate()

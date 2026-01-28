@@ -8,14 +8,14 @@ export function useOfflineSetup() {
 
   const handleOffline = () => {
     if (location.pathname !== "/offline") {
-      sendLog("Internet: offline")
+      sendLog("Internet offline")
       navigate("/offline")
     }
   }
 
   const handleOnline = () => {
     if (location.pathname === "/offline") {
-      sendLog("Internet: online")
+      sendLog("Internet online")
       navigate("/")
     }
   }
@@ -29,6 +29,7 @@ export function useOfflineSetup() {
     window.addEventListener("offline", handleOffline)
     window.addEventListener("online", handleOnline)
 
+    // クリーンアップ
     return () => {
       window.removeEventListener("offline", handleOffline)
       window.removeEventListener("online", handleOnline)

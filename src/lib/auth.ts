@@ -1,13 +1,15 @@
 import { signOut } from "firebase/auth"
-import { auth, sendError } from "@/lib"
+import { sendError, sendLog } from "@/lib"
+import { auth } from "@/lib/firebase"
 
 export async function logout() {
   try {
+    sendLog("About to logout")
     await signOut(auth)
   } catch(e) {
     sendError(e)
 
-    // Sentryにはキャッチしないreturnでエラーを返す！
-    return { error: e }
+    // 二重エラーになるのでreturnで返す
+    return e
   }
 }

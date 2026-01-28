@@ -1,13 +1,15 @@
 import type React from "react"
 import { useMemo } from "react"
+import { Link } from "react-router-dom"
+import { logout as logoutFunc } from "@/lib"
+import { useAuthStore } from "@/hooks/store"
+
+// アイコン
 import { FaHome } from "react-icons/fa"
 import { FaBowlFood } from "react-icons/fa6"
 import { IoMdMenu, IoMdSettings } from "react-icons/io"
-import { Link } from "react-router-dom"
 import { RiMoneyDollarCircleFill } from "react-icons/ri"
 import { MdLogout } from "react-icons/md"
-import { logout as logoutFunc } from "../lib/auth"
-import { useAuthStore } from "../hooks/store/auth"
 
 type FooterType = "home" | "menu" | "charge" | "settings"
 
@@ -16,7 +18,8 @@ type Main = {
   title: string
   footerType: FooterType,
   logout?: boolean,
-  noMargin?: boolean
+  noMargin?: boolean,
+  className?: string
 }
 
 type FooterMap = {
@@ -72,7 +75,7 @@ const footerMapLogout: FooterMap = [
   }
 ]
 
-export function MainComponent({ children, title, footerType, logout, noMargin }: Main) {
+export function MainComponent({ children, title, footerType, logout, noMargin, className }: Main) {
   const { user, authLoading } = useAuthStore()
 
   const map = useMemo(() => {
@@ -85,21 +88,22 @@ export function MainComponent({ children, title, footerType, logout, noMargin }:
   return (
     <>
       <div className="bg-side-main text-side-font px-2 h-12 items-center flex gap-2 fixed top-0 w-full">
-        <IoMdMenu size={35} className="cursor-pointer p-1 bg-side-main hover:bg-side-sub transition rounded-md hidden md:block" />
-        <p className="text-xl p-1 font-bold z-50">{title}</p>
+        <IoMdMenu size={30} className="cursor-pointer bg-side-main hidden md:block" />
+        <p className="text-xl font-bold z-50">{title}</p>
 
         {(!logout || (logout === true && user)) && (
-          <MdLogout className="cursor-pointer p-1 ml-auto bg-side-main hover:bg-side-sub transition rounded-md" size={35} onClick={logoutFunc} />
+          <MdLogout className="cursor-pointer ml-auto bg-side-main" size={30} onClick={logoutFunc} />
         )}
       </div>
 
-      <div className={`${!noMargin && "pt-12 pb-20 md:pb-0"} `}>
+      {/* 実質py-2になっている... */}
+      <div className={`${!noMargin && "felx flex-col pt-14 pb-22 md:pb-0 gap-2"} ${className}`}>
         {children}
       </div>
 
       <div className="w-full flex justify-around px-2 h-20 items-center md:hidden fixed bottom-0 bg-side-main text-side-font">
         {map.map((item) => (
-          <Link key={item.footerType} to={item.to} className={`flex flex-col items-center cursor-pointer w-16 py-2 rounded-md ${footerType === item.footerType ? "bg-side-sub" : ""}`}>
+          <Link key={item.footerType} to={item.to} className={`flex flex-col items-center cursor-pointer py-1 w-16 rounded-md ${footerType === item.footerType ? "bg-side-sub" : ""}`}>
             {item.icon}
             <p className="text-sm">{item.label}</p>
           </Link>

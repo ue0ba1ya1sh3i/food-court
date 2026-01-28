@@ -3,27 +3,36 @@ import { defineConfig, loadEnv } from "vite"
 import { VitePWA } from "vite-plugin-pwa"
 import react from "@vitejs/plugin-react"
 import path from "path"
+import fs from "fs"
+
+// ちなみにJSONを明示的に示さなくてもこれはViteがやってくれるらしい
+import reqireEnv from "./settings/reqireEnv.json"
 
 export default defineConfig(({ mode }) => {
+  // アイコンサイズの指定とenv
+  const sizes = ["x48", "x96", "x192", "x512"]
   const env = loadEnv(mode, process.cwd(), "")
-  // envの確認
-  const reqireEnv = [
-    "VITE_STORE_NAME",
-    "DESCRIPTION",
-    "VITE_FIREBASE_API_KEY",
-    "VITE_FIREBASE_AUTH_DOMAIN",
-    "VITE_FIREBASE_PROJECT_ID",
-    "VITE_FIREBASE_STORAGE_BUCKET",
-    "VITE_FIREBASE_MESSAGING_SENDER_ID",
-    "VITE_FIREBASE_APP_ID",
-    "VITE_FIREBASE_MEASUREMENT_ID",
-    "SENTRY_ORG",
-    "SENTRY_PROJECT"
-  ]
 
+  // アイコンパスの指定
+  const iconDir = path.resolve(
+    __dirname,
+    "public/files/icons"
+  )
+  
+  // envに必要な変数がない場合はエラー
   for (const key of reqireEnv) {
-    if (!env[key]) {
-      throw new Error(`Environment variable ${key} is required but not defined.`)
+    if (!env[key.name]) {
+      throw new Error(`Environment variable ${key.name} is required but not defined.`)
+    }
+  }
+
+  // アイコンに必要なサイズの画像がなければエラー
+  for (const size of sizes) {
+    const iconPath = path.join(iconDir, `${size}.png`)
+    if (!fs.existsSync(iconPath)) {
+      throw new Error(
+        `Icon file missing: ${iconPath}`
+      )
     }
   }
 
@@ -40,42 +49,17 @@ export default defineConfig(({ mode }) => {
 
         manifest: {
           name: env.VITE_STORE_NAME,
-          short_name: "Food Court",
-          description: env.DESCRIPTION,
-          theme_color: "#F3F4F6",
-          background_color: "#F3F4F6",
+          short_name: env.VITE_STORE_NAME,
+          description: env.VITE_DESCRIPTION,
+          theme_color: env.COLOR,
+          background_color: env.COLOR,
           display: "standalone",
           start_url: "/",
 
-          icons: [
-            {
-              "purpose": "maskable",
-              "sizes": "48x48",
-              "src": "/files/icons/x48.png",
-              "type": "image/png"
-            },
-
-            {
-              "purpose": "maskable",
-              "sizes": "96x96",
-              "src": "/files/icons/x96.png",
-              "type": "image/png"
-            },
-
-            {
-              "purpose": "maskable",
-              "sizes": "192x192",
-              "src": "/files/icons/x192.png",
-              "type": "image/png"
-            },
-
-            {
-              "purpose": "maskable",
-              "sizes": "512x512",
-              "src": "/files/icons/x512.png",
-              "type": "image/png"
-            }
-          ]
+          icons: sizes.flatMap(size => ([
+            { purpose: "maskable", sizes: size, src: `/files/icons/${size}.png`, type: "image/png" },
+            { purpose: "any", sizes: size, src: `/files/icons/${size}.png`, type: "image/png" },
+          ]))
         }
       }),
 
@@ -84,11 +68,6 @@ export default defineConfig(({ mode }) => {
         project: env.SENTRY_PROJECT
       })
     ],
-
-    server: {
-      host: true,
-      port: 5173
-    },
 
     build: {
       sourcemap: true,

@@ -4,14 +4,20 @@ import prompts from "prompts"
 import ora from "ora"
 import fs from "fs"
 import { execSync } from "child_process"
+import requireEnv from "../settings/reqireEnv.json" with { type: "json" }
 
-const run = (cmd, silent = true) => {
+const run = (cmd, error, silent = true) => {
   try {
     // 同期的にコマンド実行して成功したならtrue返す
     execSync(cmd, { stdio: silent ? "ignore" : "inherit" })
     return true
   } catch {
-    return false
+    if (!error) {
+      return false
+    } else {
+      error.fail("An error has occurred")
+      process.exit(1)
+    }
   }
 }
 
@@ -21,81 +27,56 @@ const completeLog = (message) => {
 
 // Firebase CLIのインストール確認
 function firebaseCLI() {
-  const firebaseSpinner = ora("Checking Firebase CLI...").start()
+  const spinner = ora("Checking Firebase CLI...").start()
   if (run("firebase --version")) {
-    firebaseSpinner.succeed("Firebase CLI already installed!")
+    spinner.succeed("Firebase CLI already installed!")
   } else {
-    firebaseSpinner.text = "Installing Firebase CLI..."
-    run("npm install -g firebase-tools")
-    firebaseSpinner.succeed("Firebase CLI installed!")
+    spinner.text = "Installing Firebase CLI..."
+    spinner.render()
+    run("npm install -g firebase-tools", spinner)
+    spinner.succeed("Firebase CLI install completed!")
   }
 }
 
 // Firebaseログイン確認
 function firebaseLogin() {
-  const loginSpinner = ora("Checking Firebase login...").start()
-  if (run("firebase projects:list")) {
-    loginSpinner.succeed("Already logged in to Firebase!")
+  const spinner = ora("Checking Firebase login...").start()
+  if (run("firebase auth:print-access-token")) {
+    spinner.succeed("Already logged in to Firebase!")
   } else {
-    loginSpinner.text = "Logging in to Firebase..."
-    run("firebase login")
-    loginSpinner.succeed("Firebase login completed!")
+    spinner.text = "Logging in to Firebase..."
+    spinner.render()
+    run("firebase login", spinner, false)
+    spinner.succeed("Firebase login completed!")
   }
 }
 
 // Functionsの依存関係のインストール
 function installFunctionNpm() {
-  const npmSpinner = ora("Installing Firebase Functions dependencies...").start()
-  run("cd functions && npm install")
-  npmSpinner.succeed("Dependencies installed!")
+  const spinner = ora("Installing Firebase Functions dependencies...").start()
+  run("cd functions && npm install", spinner)
+  spinner.succeed("Dependencies installed!")
 }
 
 // envの設定
 async function setEnv() {
   if (!fs.existsSync(".env")) {
-    console.log(chalk.blue("Please enter the following environment variables"))
     console.log(chalk.blue("Please setup Sentry project at https://sentry.io"))
+    console.log(chalk.blue("And please enter the following environment variables"))
 
-    const env = await prompts([
-      { type: "text", name: "name", message: "Store name" },
-      { type: "text", name: "description", message: "Description" },
-      { type: "text", name: "allowDomain", message: "Allow domain" },
+    // promptsをJSONから生成
+    const questions = requireEnv.map(e => ({
+      type: "text",
+      name: e.name,
+      message: e.message,
+    }))
 
-      // Firebase
-      { type: "text", name: "apiKey", message: "Firebase API Key" },
-      { type: "text", name: "authDomain", message: "Firebase Auth Domain" },
-      { type: "text", name: "projectId", message: "Firebase Project ID" },
-      { type: "text", name: "storageBucket", message: "Firebase Storage Bucket" },
-      { type: "text", name: "senderId", message: "Firebase Messaging Sender ID" },
-      { type: "text", name: "appId", message: "Firebase App ID" },
-      { type: "text", name: "measurementId", message: "Firebase Measurement ID" },
+    const answers = await prompts(questions)
 
-      // Sentry
-      { type: "text", name: "sentryDsn", message: "Sentry DSN" },
-      { type: "text", name: "sentryOrg", message: "Sentry Org" },
-      { type: "text", name: "sentryProject", message: "Sentry Project" },
-    ])
-
-    // .envファイルの作成
-    const envLines = [
-      `VITE_STORE_NAME=${env.name}`,
-      `VITE_ALLOW_DOMAIN=${env.allowDomain}`,
-      `DESCRIPTION=${env.description}`,
-      ``,
-      `# Firebase`,
-      `VITE_FIREBASE_API_KEY=${env.apiKey}`,
-      `VITE_FIREBASE_AUTH_DOMAIN=${env.authDomain}`,
-      `VITE_FIREBASE_PROJECT_ID=${env.projectId}`,
-      `VITE_FIREBASE_STORAGE_BUCKET=${env.storageBucket}`,
-      `VITE_FIREBASE_MESSAGING_SENDER_ID=${env.senderId}`,
-      `VITE_FIREBASE_APP_ID=${env.appId}`,
-      `VITE_FIREBASE_MEASUREMENT_ID=${env.measurementId}`,
-      ``,
-      `# Sentry`,
-      `VITE_SENTRY_DSN=${env.sentryDsn}`,
-      `SENTRY_ORG=${env.sentryOrg}`,
-      `SENTRY_PROJECT=${env.sentryProject}`,
-    ]
+    // .env を生成
+    const envLines = requireEnv.map(e =>
+      `${e.name}=${answers[e.name] ?? ""}`
+    )
 
     fs.writeFileSync(".env", envLines.join("\n"))
 

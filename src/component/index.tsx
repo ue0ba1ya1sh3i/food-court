@@ -1,3 +1,4 @@
 export { ButtonComponent } from "./button"
 export { MainComponent } from "./main"
-export { SetupComponent } from "./setup"
+export { DialogComponent } from "./dialog"
+export { LoadingComponent } from "./loading"

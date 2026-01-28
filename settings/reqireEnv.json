@@ -1,0 +1,62 @@
+[
+  {
+    "name": "VITE_STORE_NAME",
+    "message": "Store Name"
+  },
+
+
+  {
+    "name": "VITE_DESCRIPTION",
+    "message": "Store Description"
+  },
+
+  {
+    "name": "COLOR",
+    "message": "Store Color"
+  },
+
+  {
+    "name": "VITE_FIREBASE_API_KEY",
+    "message": "Firebase API Key"
+  },
+
+  {
+    "name": "VITE_FIREBASE_AUTH_DOMAIN",
+    "message": "Firebase Auth Domain"
+  },
+
+  {
+    "name": "VITE_FIREBASE_PROJECT_ID",
+    "message": "Firebase Project ID"
+  },
+
+  {
+    "name": "VITE_FIREBASE_STORAGE_BUCKET",
+    "message": "Firebase Storage Bucket"
+  },
+
+  {
+    "name": "VITE_FIREBASE_MESSAGING_SENDER_ID",
+    "message": "Firebase Messaging Sunder ID"
+  },
+
+  {
+    "name": "VITE_FIREBASE_APP_ID",
+    "message": "Firebase App ID"
+  },
+  
+  {
+    "name": "VITE_FIREBASE_MEASUREMENT_ID",
+    "message": "Firebase Measurement ID"
+  },
+  
+  {
+    "name": "SENTRY_ORG",
+    "message": "Sentry Org"
+  },
+
+  {
+    "name": "SENTRY_PROJECT",
+    "message": "Sentry Project Name"
+  }
+]

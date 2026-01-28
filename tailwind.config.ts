@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss"
 
-export default {
+const config: Config = {
   content: [
     "./index.html",
     "./src/**/*.{ts,tsx}"
@@ -19,6 +19,7 @@ export default {
 
         main: {
           main: "var(--main-main)",
+          sub: "var(--main-sub)",
           font: "var(--main-font)"
         },
 
@@ -26,10 +27,10 @@ export default {
           main: "var(--side-main)",
           sub: "var(--side-sub)",
           font: "var(--side-font)"
-        },
-
-        test: "#ff00ff"
+        }
       }
     }
   }
 }
+
+export default config
